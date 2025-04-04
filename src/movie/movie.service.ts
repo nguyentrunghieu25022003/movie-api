@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Main, MainDocument } from './schemas/movie.schema';
-import { TotalScore, TotalScoreDocument } from '../score/schemas/score.schema';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { QueryMovieDto } from './dto/query-movie.dto';
@@ -13,7 +12,6 @@ import { ErrorMessages } from '../common/errors/error-message';
 export class MovieService {
   constructor(
     @InjectModel(Main.name) private movieModel: Model<MainDocument>,
-    @InjectModel(TotalScore.name) private totalScore: Model<TotalScoreDocument>,
   ) {}
 
   async create(createMovieDto: CreateMovieDto): Promise<Main> {
@@ -106,44 +104,6 @@ export class MovieService {
 
     return {
       episodes: result.episodes,
-    };
-  }
-
-  async getView(id: string) {
-    const result = await this.movieModel.findById(id).exec();
-
-    if (!result) {
-      throw ErrorMessages.MOVIE_NOT_FOUND;
-    }
-
-    return {
-      view: result.movie.view,
-    };
-  }
-
-  async viewIncrement(id: string) {
-    const result = await this.totalScore
-      .findOneAndUpdate(
-        { movieId: id },
-        { $inc: { voteQuantity: 1 } },
-        { new: true, upsert: true },
-      )
-      .exec();
-
-    return {
-      data: result,
-    };
-  }
-
-  async getScore(id: string) {
-    const result = await this.totalScore.findOne({ movieId: id }).exec();
-
-    if (!result) {
-      throw ErrorMessages.MOVIE_NOT_FOUND;
-    }
-
-    return {
-      score: result,
     };
   }
 }

@@ -1,4 +1,3 @@
-// src/movie/dto/create-movie.dto.ts
 import { ApiProperty } from '@nestjs/swagger';
 
 class CategoryDto {

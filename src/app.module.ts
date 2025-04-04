@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { MovieModule } from './movie/movie.module';
 import { CommentModule } from './comment/comment.module';
+import { ScoreModule } from './score/score.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CrawlerModule } from './crawler/crawler.module';
@@ -33,6 +34,7 @@ import { CrawlerModule } from './crawler/crawler.module';
       }),
     }),
     MovieModule,
+    ScoreModule,
     CommentModule,
     AuthModule,
     UserModule,
