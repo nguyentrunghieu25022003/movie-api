@@ -10,11 +10,24 @@ export class CrawlerController {
   constructor(private readonly crawlerService: CrawlerService) {}
   @Get('kkphim')
   findAll(@Query() queryMovieDto: QueryMovieDto) {
-    return this.crawlerService.findAll(queryMovieDto.page);
+    return this.crawlerService.kkPhimFindAll(queryMovieDto.page);
   }
 
   @Get('kkphim/:name')
   findOne(@Param() getMovieDto: GetMovieDto) {
-    return this.crawlerService.findOne(getMovieDto.name);
+    return this.crawlerService.kkPhimFindOne(getMovieDto.name);
+  }
+
+  @Get('motchill/:category')
+  motChillFindAll(
+    @Param('category') category: string,
+    @Query() queryMovieDto: QueryMovieDto,
+  ) {
+    return this.crawlerService.motChillFindAll(category, queryMovieDto.page);
+  }
+
+  @Get('motchill/:name')
+  motChillFindOne(@Param() getMovieDto: GetMovieDto) {
+    return this.crawlerService.motChillFindOne(getMovieDto.name);
   }
 }

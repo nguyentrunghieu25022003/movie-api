@@ -2,7 +2,7 @@
 import { CustomHttpError } from './custom-http-error';
 
 export class ErrorMessages {
-  static readonly MOVIE_NOT_FOUND = new CustomHttpError(404, 'Not found');
+  static readonly NOT_FOUND = new CustomHttpError(404, 'Not found');
   static readonly UNAUTHORIZED = new CustomHttpError(
     403,
     'Unauthorized access',

@@ -61,7 +61,7 @@ export class MovieService {
     const result = await this.movieModel.findById(id).exec();
 
     if (!result) {
-      throw ErrorMessages.MOVIE_NOT_FOUND;
+      throw ErrorMessages.NOT_FOUND;
     }
 
     return {
@@ -75,7 +75,7 @@ export class MovieService {
       .exec();
 
     if (!updated) {
-      throw ErrorMessages.MOVIE_NOT_FOUND;
+      throw ErrorMessages.NOT_FOUND;
     }
 
     return {
@@ -87,7 +87,7 @@ export class MovieService {
     const deleted = await this.movieModel.findByIdAndDelete(id).exec();
 
     if (!deleted) {
-      throw ErrorMessages.MOVIE_NOT_FOUND;
+      throw ErrorMessages.NOT_FOUND;
     }
 
     return {
@@ -99,7 +99,7 @@ export class MovieService {
     const result = await this.movieModel.findById(id).exec();
 
     if (!result) {
-      throw ErrorMessages.MOVIE_NOT_FOUND;
+      throw ErrorMessages.NOT_FOUND;
     }
 
     return {

@@ -16,7 +16,7 @@ export class ScoreService {
       .exec();
 
     if (!result) {
-      throw ErrorMessages.MOVIE_NOT_FOUND;
+      throw ErrorMessages.NOT_FOUND;
     }
 
     return {
