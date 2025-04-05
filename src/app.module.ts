@@ -11,6 +11,7 @@ import { UserModule } from './user/user.module';
 import { CrawlerModule } from './crawler/crawler.module';
 import { NotificationModule } from './notification/notification.module';
 import { FavoriteModule } from './favorite/favorite.module';
+import { HistoriesModule } from './histories/histories.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { FavoriteModule } from './favorite/favorite.module';
     CrawlerModule,
     NotificationModule,
     FavoriteModule,
+    HistoriesModule,
   ],
   controllers: [],
   providers: [],
