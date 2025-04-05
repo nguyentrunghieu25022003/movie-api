@@ -26,7 +26,7 @@ export class CrawlerController {
     return this.crawlerService.motChillFindAll(category, queryMovieDto.page);
   }
 
-  @Get('motchill/:name')
+  @Get('motchill/episodes/:name')
   motChillFindOne(@Param() getMovieDto: GetMovieDto) {
     return this.crawlerService.motChillFindOne(getMovieDto.name);
   }

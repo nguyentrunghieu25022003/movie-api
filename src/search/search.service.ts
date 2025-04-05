@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Main, MainDocument } from '../movie/schemas/movie.schema';
 import { SearchMovieDto } from './dto/search-movie.dto';
-import { buildSortQuery } from '../common/helpers/sort.helper';
+import { buildSortQuery } from '../common/helpers/sort';
 
 @Injectable()
 export class SearchService {

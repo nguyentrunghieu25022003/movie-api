@@ -5,7 +5,7 @@ import { Comment, CommentDocument } from './schemas/comment.schema';
 import { ErrorMessages } from '../common/errors/error-message';
 import { CreateCommentDto } from './dto/create-comment.dto';
 @Injectable()
-export class CommentService {
+export class CommentsService {
   constructor(
     @InjectModel(Comment.name) private commentModel: Model<CommentDocument>,
   ) {}
@@ -50,6 +50,11 @@ export class CommentService {
 
   async remove(id: string) {
     const deleted = await this.commentModel.findByIdAndDelete(id);
+
+    if (!deleted) {
+      throw ErrorMessages.NOT_FOUND;
+    }
+
     return { message: 'Comment deleted successfully' };
   }
 }

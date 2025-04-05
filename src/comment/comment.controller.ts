@@ -12,7 +12,7 @@ import {
 import { ApiBody } from '@nestjs/swagger';
 import { CacheInterceptor } from '@nestjs/cache-manager';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { CommentService } from './comment.service';
+import { CommentsService } from './comment.service';
 import { ParamIdDto } from './dto/param-id.dto';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
@@ -20,8 +20,8 @@ import { UpdateCommentDto } from './dto/update-comment.dto';
 @Controller('comments')
 @UseGuards(RolesGuard)
 @UseInterceptors(CacheInterceptor)
-export class CommentController {
-  constructor(private readonly commentService: CommentService) {}
+export class CommentsController {
+  constructor(private readonly commentService: CommentsService) {}
   @Post('')
   @ApiBody({ type: CreateCommentDto })
   create(@Body() createCommentDto: CreateCommentDto) {

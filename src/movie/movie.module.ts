@@ -13,6 +13,7 @@ import { AuthMiddleware } from '../common/middlewares/auth.middleware';
   ],
   controllers: [MovieController, SearchController],
   providers: [MovieService, SearchService],
+  exports: [MovieService],
 })
 export class MovieModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

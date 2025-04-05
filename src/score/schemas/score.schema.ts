@@ -1,11 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type TotalScoreDocument = TotalScore & Document;
 
 @Schema()
 export class TotalScore {
-  @Prop({ required: true })
+  @Prop({ type: Types.ObjectId, ref: 'Movie', required: true, index: true })
   movieId: string;
 
   @Prop({ required: true, default: 0 })

@@ -5,7 +5,7 @@ import { Main, MainDocument } from './schemas/movie.schema';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { QueryMovieDto } from './dto/query-movie.dto';
-import { buildSortQuery } from '../common/helpers/sort.helper';
+import { buildSortQuery } from '../common/helpers/sort';
 import { ErrorMessages } from '../common/errors/error-message';
 
 @Injectable()
@@ -13,6 +13,10 @@ export class MovieService {
   constructor(
     @InjectModel(Main.name) private movieModel: Model<MainDocument>,
   ) {}
+
+  isExist(id: string) {
+    return this.movieModel.findById(id).exec();
+  }
 
   async create(createMovieDto: CreateMovieDto): Promise<Main> {
     const main = new this.movieModel({

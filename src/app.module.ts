@@ -9,6 +9,8 @@ import { ScoreModule } from './score/score.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { CrawlerModule } from './crawler/crawler.module';
+import { NotificationModule } from './notification/notification.module';
+import { FavoriteModule } from './favorite/favorite.module';
 
 @Module({
   imports: [
@@ -39,6 +41,8 @@ import { CrawlerModule } from './crawler/crawler.module';
     AuthModule,
     UserModule,
     CrawlerModule,
+    NotificationModule,
+    FavoriteModule,
   ],
   controllers: [],
   providers: [],

@@ -2,19 +2,14 @@ import { Injectable } from '@nestjs/common';
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 import { ErrorMessages } from '../common/errors/error-message';
+import { buildHeaders } from '../common/helpers/header';
 
 @Injectable()
 export class CrawlerService {
   async kkPhimFindAll(page: number): Promise<any[]> {
     const url = `${process.env.KKPHIM_URL}?page=${page}`;
 
-    const { data } = await axios.get<string>(url, {
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-        Accept: 'text/html',
-      },
-    });
+    const { data } = await axios.get<string>(url, buildHeaders());
 
     if (!data) {
       throw ErrorMessages.NOT_FOUND;
@@ -41,7 +36,7 @@ export class CrawlerService {
 
   async kkPhimFindOne(name: string) {
     const url = `${process.env.KKPHIM_API}/phim/${name}`;
-    const { data } = await axios.get<object>(url);
+    const { data } = await axios.get<object>(url, buildHeaders());
 
     if (!data) {
       throw ErrorMessages.NOT_FOUND;
@@ -50,16 +45,10 @@ export class CrawlerService {
     return data;
   }
 
-  async motChillFindAll(category: string, page: number): Promise<any[]> {
+  async motChillFindAll(category: string, page: number) {
     const url = `${process.env.MOTCHILL_API}/the-loai/${category}?page=${page}`;
 
-    const { data } = await axios.get<string>(url, {
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-        Accept: 'text/html',
-      },
-    });
+    const { data } = await axios.get<string>(url, buildHeaders());
 
     if (!data) {
       throw ErrorMessages.NOT_FOUND;
@@ -86,13 +75,7 @@ export class CrawlerService {
   async motChillFindOne(name: string) {
     const url = `${process.env.MOTCHILL_API}/phim/${name}/tap-1`;
 
-    const { data } = await axios.get<string>(url, {
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-        Accept: 'text/html',
-      },
-    });
+    const { data } = await axios.get<string>(url, buildHeaders());
 
     if (!data) {
       throw ErrorMessages.NOT_FOUND;
@@ -103,12 +86,12 @@ export class CrawlerService {
     const episodes: object[] = [];
 
     $('.myui-content__list.sort-list.clearfix li a').each((_, el) => {
-      const number = $(el).text().trim();
+      const episode = $(el).text().trim();
       const href = $(el).attr('href');
 
-      episodes.push({ number, href });
+      episodes.push({ episode, href });
     });
 
-    return episodes;
+    return episodes.reverse();
   }
 }
